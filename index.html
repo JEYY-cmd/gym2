@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fortress home gym equipment — racks, benches, dumbbells, kettlebells and complete strength spaces.">
+  <title>FORTRESS — Home Gym Equipment</title>
+  <style>
+    :root {
+      --black: #000000;
+      --black-2: #111111;
+      --white: #f7f7f7;
+      --pure: #ffffff;
+      --brown: #171717;
+      --brown-2: #292929;
+      --amber: #ffffff;
+      --amber-2: #e9e9e9;
+      --grey: #aaaaaa;
+      --line: #303030;
+      --display: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+      --body: Arial, Helvetica, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--black); }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--white);
+      background: var(--black);
+      font-family: var(--body);
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { display: block; width: 100%; filter: grayscale(1) contrast(1.08) !important; }
+    ::selection { color: var(--black); background: var(--white); }
+
+    .topline {
+      min-height: 30px;
+      padding: 6px clamp(18px, 4.5vw, 78px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--black);
+      background: var(--amber);
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      min-height: 82px;
+      padding: 12px clamp(18px, 4.5vw, 78px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 35px;
+      color: var(--white);
+      background: rgba(7,7,7,.97);
+      border-bottom: 1px solid #292929;
+      backdrop-filter: blur(14px);
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--white);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .logo-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: var(--amber);
+      clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    }
+    .logo-icon svg { width: 40px; height: 40px; }
+    .logo-word { font-family: var(--display); font-size: 29px; line-height: .88; letter-spacing: .075em; }
+    .logo-word small { display: block; margin-top: 5px; color: #919191; font-family: var(--body); font-size: 8px; font-weight: 400; letter-spacing: .18em; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      border: 1px solid #353535;
+      overflow-x: auto;
+    }
+    .nav-tab {
+      min-height: 43px;
+      padding: 10px 19px;
+      flex: 0 0 auto;
+      border: 0;
+      border-right: 1px solid #353535;
+      color: #aaaaaa;
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .nav-tab:last-child { border-right: 0; }
+    .nav-tab:hover { color: var(--white); background: #1b1b1b; }
+    .nav-tab.active { color: var(--black); background: var(--amber); }
+
+    .page { display: none; min-height: 70vh; animation: enter .36s ease; }
+    .page.active { display: block; }
+    @keyframes enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .wrap { width: min(1480px, calc(100% - clamp(36px, 9vw, 156px))); margin: 0 auto; }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--amber);
+      font-family: var(--display);
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .kicker::before { content: ""; width: 34px; height: 5px; background: currentColor; transform: skewX(-28deg); }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--display); text-transform: uppercase; }
+    h1 { margin-bottom: 24px; font-size: clamp(68px, 9.5vw, 150px); line-height: .82; letter-spacing: -.025em; }
+    h2 { margin-bottom: 22px; font-size: clamp(48px, 6.5vw, 98px); line-height: .86; letter-spacing: -.015em; }
+    h3 { margin-bottom: 10px; font-size: 27px; line-height: .95; letter-spacing: .02em; }
+    p { color: #aaaaaa; font-size: 15px; font-weight: 400; }
+
+    .btn {
+      min-height: 52px;
+      padding: 14px 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      border: 1px solid var(--amber);
+      color: var(--black);
+      background: var(--amber);
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-decoration: none;
+      text-transform: uppercase;
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .btn::after { content: "↗"; font-family: Arial, sans-serif; font-size: 17px; }
+    .btn:hover { transform: translateY(-3px); background: var(--amber-2); }
+    .btn.dark { color: var(--white); background: var(--black); border-color: var(--black); }
+    .btn.dark:hover { color: var(--amber); }
+    .btn.outline { color: var(--white); background: transparent; border-color: #666666; }
+    .btn.outline:hover { color: var(--black); background: var(--amber); border-color: var(--amber); }
+    .btn.small { min-height: 42px; padding: 10px 17px; font-size: 11px; }
+
+    /* HOME */
+    .hero {
+      min-height: 760px;
+      display: grid;
+      grid-template-columns: 44% 56%;
+      color: var(--white);
+      background: var(--black);
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      padding: clamp(74px, 10vw, 150px) clamp(28px, 5vw, 86px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,.055), transparent 33%),
+        var(--black);
+    }
+    .hero-copy::after {
+      content: "F / 01";
+      position: absolute;
+      left: clamp(28px, 5vw, 86px);
+      bottom: 30px;
+      color: #626262;
+      font-family: var(--display);
+      font-size: 12px;
+      letter-spacing: .2em;
+    }
+    .hero-copy .kicker { margin-bottom: 28px; }
+    .hero-copy h1 span { color: var(--amber); }
+    .hero-copy p { max-width: 420px; margin-bottom: 34px; color: #aaaaaa; font-size: 17px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .hero-visual { position: relative; min-height: 760px; overflow: hidden; background: #111; }
+    .hero-visual img { height: 100%; object-fit: cover; }
+    .hero-visual::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, var(--black), transparent 27%); }
+    .hero-visual::after { content: ""; position: absolute; z-index: 1; left: 11%; bottom: 0; width: 5px; height: 35%; background: var(--amber); transform: skewX(-18deg); }
+    .hero-stamp {
+      position: absolute;
+      z-index: 2;
+      right: 28px;
+      bottom: 28px;
+      width: 170px;
+      height: 170px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--amber);
+      color: var(--white);
+      background: rgba(7,7,7,.83);
+      font-family: var(--display);
+      font-size: 18px;
+      line-height: 1.05;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+    }
+
+    .strength-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      color: var(--black);
+      background: var(--amber);
+    }
+    .strength-item { padding: 32px 28px; border-right: 1px solid rgba(7,7,7,.25); }
+    .strength-item:last-child { border: 0; }
+    .strength-item b { display: block; font-family: var(--display); font-size: 34px; line-height: 1; }
+    .strength-item span { font-size: 10px; font-weight: 400; letter-spacing: .1em; text-transform: none; }
+
+    .home-focus {
+      padding: clamp(105px, 13vw, 190px) 0;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      align-items: center;
+      gap: clamp(65px, 10vw, 160px);
+    }
+    .focus-mark { width: 120px; height: 14px; margin-bottom: 37px; background: var(--brown-2); transform: skewX(-30deg); }
+    .home-focus p { max-width: 410px; margin-bottom: 30px; }
+    .focus-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--black); }
+    .focus-cell { min-height: 190px; padding: 34px; display: flex; flex-direction: column; justify-content: space-between; color: var(--white); background: var(--black-2); }
+    .focus-cell:nth-child(2), .focus-cell:nth-child(3) { background: var(--brown); }
+    .focus-cell b { color: var(--amber); font-family: var(--display); font-size: 42px; }
+    .focus-cell span { font-family: var(--display); font-size: 19px; letter-spacing: .05em; text-transform: uppercase; }
+
+    /* PAGE HEAD */
+    .page-head {
+      padding: clamp(100px, 13vw, 185px) 0 clamp(70px, 9vw, 125px);
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: end;
+      gap: 70px;
+    }
+    .page-head h1 { max-width: 900px; margin: 20px 0 0; }
+    .page-head p { max-width: 420px; margin: 0; font-size: 17px; }
+
+    /* EQUIPMENT */
+    .equipment-page { color: var(--white); background: var(--black); }
+    .equipment-page .page-head p { color: #9d9d9d; }
+    .filters { padding-bottom: 28px; display: flex; gap: 8px; overflow-x: auto; border-bottom: 1px solid var(--line); }
+    .filter {
+      flex: 0 0 auto;
+      padding: 10px 17px;
+      border: 1px solid #3a3a3a;
+      color: #9f9f9f;
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .filter:hover, .filter.active { color: var(--black); background: var(--amber); border-color: var(--amber); }
+
+    .product-grid { padding: 44px 0 120px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .product-card { position: relative; min-width: 0; background: #101010; border: 1px solid #282828; overflow: hidden; }
+    .product-card.hidden { display: none; }
+    .product-image { position: relative; aspect-ratio: 1.35; overflow: hidden; background: #181818; }
+    .product-image img { height: 100%; object-fit: cover; transition: transform .5s ease, filter .35s ease; }
+    .product-card:hover .product-image img { transform: scale(1.045); filter: brightness(1.1); }
+    .product-number { position: absolute; top: 14px; left: 14px; padding: 7px 9px; color: var(--black); background: var(--amber); font-family: var(--display); font-size: 11px; }
+    .product-body { padding: 26px 24px 25px; }
+    .product-type { color: var(--amber); font-size: 9px; letter-spacing: .17em; text-transform: uppercase; }
+    .product-body h3 { margin: 8px 0 7px; font-size: 31px; }
+    .product-body p { min-height: 42px; margin-bottom: 20px; color: #888888; font-size: 13px; }
+    .product-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .product-price { color: var(--white); font-family: var(--display); font-size: 20px; letter-spacing: .04em; }
+    .spec-btn { padding: 9px 11px; border: 1px solid #505050; color: #c4c4c4; background: transparent; cursor: pointer; font-family: var(--display); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .spec-btn:hover { color: var(--black); background: var(--amber); border-color: var(--amber); }
+    .equipment-note { padding: 0 0 110px; display: flex; justify-content: space-between; gap: 30px; color: #5f5f5f; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
+
+    /* SERVICES */
+    .services-page { background: var(--white); }
+    .service-stack { padding-bottom: 130px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .service-card { min-height: 420px; padding: 38px; display: flex; flex-direction: column; background: var(--pure); border: 1px solid #d8d8d8; }
+    .service-card:nth-child(2) { color: var(--white); background: var(--brown); border-color: var(--brown); transform: translateY(38px); }
+    .service-card:nth-child(2) p { color: #c0c0c0; }
+    .service-card:nth-child(3) { color: var(--white); background: var(--black); border-color: var(--black); }
+    .service-card:nth-child(3) p { color: #9b9b9b; }
+    .service-icon { width: 74px; height: 74px; margin-bottom: auto; display: grid; place-items: center; color: var(--black); background: var(--amber); font-family: var(--display); font-size: 30px; clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
+    .service-card h3 { margin-top: 55px; font-size: 40px; }
+    .service-card p { max-width: 290px; margin-bottom: 24px; }
+    .service-card button { align-self: flex-start; }
+
+    .service-cta {
+      margin-bottom: 130px;
+      min-height: 360px;
+      padding: clamp(48px, 8vw, 110px);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 70px;
+      color: var(--white);
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-cta::after { content: "F"; position: absolute; right: 7%; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,.08); font-family: var(--display); font-size: 330px; line-height: 1; }
+    .service-cta h2 { position: relative; z-index: 1; max-width: 850px; margin: 0; }
+    .service-cta .btn { position: relative; z-index: 2; }
+
+    /* ABOUT */
+    .about-page { color: var(--white); background: var(--brown); }
+    .about-page .page-head p { color: #b8b8b8; }
+    .about-story { padding-bottom: 140px; display: grid; grid-template-columns: 1.12fr .88fr; align-items: center; gap: clamp(60px, 9vw, 140px); }
+    .about-image { position: relative; min-height: 560px; }
+    .about-image img { height: 100%; min-height: 560px; object-fit: cover; filter: saturate(.8); }
+    .about-image::after { content: "BUILT FOR HOME.\A MADE FOR WORK."; white-space: pre; position: absolute; left: -22px; bottom: -22px; padding: 20px 24px; color: var(--black); background: var(--amber); font-family: var(--display); font-size: 20px; line-height: 1.1; letter-spacing: .04em; }
+    .about-copy h2 { margin-top: 25px; }
+    .about-copy p { max-width: 470px; color: #b9b9b9; }
+    .about-values { padding-bottom: 130px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .value { min-height: 250px; padding: 38px; display: flex; flex-direction: column; justify-content: space-between; background: rgba(7,7,7,.78); }
+    .value b { color: var(--amber); font-family: var(--display); font-size: 52px; }
+    .value h3 { font-size: 30px; }
+    .value p { margin: 0; color: #9d9d9d; font-size: 13px; }
+
+    /* CONTACT */
+    .contact-page { background: var(--white); }
+    .contact-shell { padding-bottom: 130px; display: grid; grid-template-columns: .78fr 1.22fr; gap: 2px; background: var(--amber); }
+    .contact-aside { padding: clamp(45px, 7vw, 95px); color: var(--white); background: var(--black); }
+    .contact-aside h2 { margin: 25px 0 32px; }
+    .contact-aside p { max-width: 390px; color: #989898; }
+    .contact-details { margin-top: 48px; }
+    .contact-line { padding: 17px 0; border-bottom: 1px solid #343434; color: #d6d6d6; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+    .contact-line b { display: inline-block; width: 90px; color: var(--amber); font-family: var(--display); }
+
+    .contact-form { padding: clamp(45px, 7vw, 95px); background: var(--pure); }
+    .contact-form h3 { margin-bottom: 35px; font-size: 42px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-family: var(--display); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+    .field input, .field select, .field textarea { width: 100%; padding: 16px; border: 1px solid #555555; outline: 0; color: var(--white); background: #171717; font-family: var(--body); font-style: normal; font-weight: 400; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--amber); box-shadow: inset 5px 0 0 var(--amber); }
+    .field textarea { min-height: 120px; resize: vertical; }
+    .form-action { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .form-action small { max-width: 340px; color: #8a8a8a; font-size: 10px; }
+    .form-status { min-height: 24px; margin-top: 17px; color: var(--brown-2); font-family: var(--display); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* MODAL */
+    .modal { position: fixed; z-index: 70; inset: 0; padding: 20px; display: none; place-items: center; background: rgba(0,0,0,.86); backdrop-filter: blur(8px); }
+    .modal.open { display: grid; }
+    .modal-panel { width: min(900px, 100%); max-height: 92vh; overflow: auto; display: grid; grid-template-columns: 1.1fr .9fr; color: var(--white); background: #101010; border: 1px solid #4d4d4d; }
+    .modal-media { min-height: 500px; }
+    .modal-media img { height: 100%; object-fit: cover; }
+    .modal-copy { position: relative; padding: 48px 40px; }
+    .modal-close { position: absolute; top: 13px; right: 13px; width: 38px; height: 38px; border: 1px solid #5b5b5b; color: var(--white); background: transparent; cursor: pointer; font-family: var(--display); font-size: 20px; }
+    .modal-close:hover { color: var(--black); background: var(--amber); border-color: var(--amber); }
+    .modal-copy h2 { margin: 18px 0 12px; font-size: 52px; }
+    .modal-copy p { color: #909090; }
+    .spec-list { margin: 28px 0; border-top: 1px solid #373737; }
+    .spec-row { padding: 12px 0; display: flex; justify-content: space-between; gap: 25px; border-bottom: 1px solid #373737; color: #c5c5c5; font-size: 11px; text-transform: uppercase; }
+    .spec-row b { color: var(--amber); font-family: var(--display); }
+
+    .toast { position: fixed; z-index: 90; right: 22px; bottom: 22px; max-width: 350px; padding: 15px 20px; color: var(--black); background: var(--amber); font-family: var(--display); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; transform: translateY(90px); opacity: 0; transition: .3s ease; }
+    .toast.show { transform: none; opacity: 1; }
+
+    .footer { padding: 58px clamp(18px, 4.5vw, 78px) 28px; color: var(--white); background: var(--black); }
+    .footer-main { display: grid; grid-template-columns: 1.6fr .7fr .7fr; gap: 60px; }
+    .footer-logo { font-family: var(--display); font-size: 41px; letter-spacing: .06em; }
+    .footer-logo span { color: var(--amber); }
+    .footer p { max-width: 430px; margin-top: 10px; color: #717171; font-size: 12px; }
+    .footer-col b { display: block; margin-bottom: 14px; color: var(--amber); font-family: var(--display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .footer-col span { display: block; margin: 7px 0; color: #8d8d8d; font-size: 11px; }
+    .footer-bottom { margin-top: 45px; padding-top: 18px; display: flex; justify-content: space-between; gap: 25px; border-top: 1px solid #292929; color: #5e5e5e; font-size: 9px; letter-spacing: .09em; text-transform: uppercase; }
+
+    /* SIMPLE BLACK-AND-WHITE REVISION */
+    body, button, input, select, textarea {
+      font-family: var(--body);
+      font-style: normal;
+      font-weight: 400;
+    }
+    h1, h2, h3, .logo-word, .nav-tab, .kicker, .btn,
+    .filter, .spec-btn, .footer-logo {
+      font-family: var(--display);
+      font-style: normal;
+      font-weight: 600;
+    }
+    p, b, strong, .logo-word small, .strength-item span, .field label {
+      font-style: normal;
+      font-weight: 400;
+    }
+    .page, .equipment-page, .services-page, .about-page, .contact-page {
+      color: var(--white);
+      background: var(--black);
+    }
+    .home-focus { color: var(--white); }
+    .home-focus p, .page-head p { color: #aaaaaa; }
+    .btn.dark { color: var(--white); background: var(--brown); border-color: var(--brown-2); }
+    .contact-shell { background: var(--brown); }
+    .contact-form { color: var(--white); background: var(--black-2); }
+    .contact-form h3, .contact-form label { color: var(--white); }
+    .service-card { color: var(--white); background: #121212; border-color: #373737; }
+    .service-card:nth-child(2), .service-card:nth-child(3) { color: var(--white); background: var(--brown); border-color: var(--brown-2); }
+
+    /* ONLY THE NAVIGATION TABS ARE ROUNDED */
+    .nav {
+      padding: 4px;
+      gap: 4px;
+      border-radius: 999px;
+    }
+    .nav-tab {
+      border: 0;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 1050px) {
+      .header { align-items: flex-start; flex-direction: column; }
+      .nav { width: 100%; }
+      .nav-tab { flex: 1 0 110px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 600px; }
+      .hero-visual::before { background: linear-gradient(180deg, var(--black), transparent 25%); }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-card { padding: 30px; }
+      .service-card h3 { font-size: 34px; }
+    }
+
+    @media (max-width: 760px) {
+      .topline span:last-child { display: none; }
+      .header { padding: 12px 16px; gap: 14px; }
+      .logo-icon { width: 43px; height: 43px; }
+      .logo-icon svg { width: 34px; height: 34px; }
+      .logo-word { font-size: 24px; }
+      .nav-tab { min-height: 39px; padding: 8px 13px; flex: 1 0 98px; font-size: 10px; }
+      .wrap { width: calc(100% - 30px); }
+      h1 { font-size: clamp(62px, 23vw, 100px); }
+      h2 { font-size: clamp(46px, 17vw, 74px); }
+      .hero { min-height: auto; }
+      .hero-copy { padding: 85px 24px 95px; }
+      .hero-copy::after { left: 24px; }
+      .hero-visual { min-height: 430px; }
+      .hero-stamp { right: 15px; bottom: 15px; width: 120px; height: 120px; font-size: 13px; }
+      .strength-strip { grid-template-columns: repeat(2, 1fr); }
+      .strength-item:nth-child(2) { border-right: 0; }
+      .strength-item:nth-child(-n+2) { border-bottom: 1px solid rgba(7,7,7,.25); }
+      .home-focus { padding: 100px 0; grid-template-columns: 1fr; }
+      .focus-list { grid-template-columns: 1fr; }
+      .focus-cell { min-height: 150px; }
+      .page-head { padding: 105px 0 70px; grid-template-columns: 1fr; gap: 30px; }
+      .product-grid { grid-template-columns: 1fr; }
+      .product-body p { min-height: auto; }
+      .equipment-note { flex-direction: column; }
+      .service-stack { grid-template-columns: 1fr; }
+      .service-card:nth-child(2) { transform: none; }
+      .service-card { min-height: 350px; }
+      .service-cta { grid-template-columns: 1fr; }
+      .about-story { grid-template-columns: 1fr; }
+      .about-image, .about-image img { min-height: 420px; }
+      .about-values { grid-template-columns: 1fr; }
+      .value { min-height: 200px; }
+      .contact-shell { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .form-action { align-items: flex-start; flex-direction: column; }
+      .modal-panel { grid-template-columns: 1fr; }
+      .modal-media { min-height: 280px; max-height: 320px; }
+      .modal-copy { padding: 42px 25px 30px; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .footer-main > :first-child { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"><span>Built for the room you own</span><span>Strength equipment · Home installation · Lagos</span></div>
+
+  <header class="header">
+    <a class="logo" href="#home" data-go="home" aria-label="Fortress home">
+      <span class="logo-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img" aria-label="Flexed muscle symbol">
+          <path fill="#070707" d="M11 48c-4-8-2-17 4-23l-1-12c-.4-5 6-7 8-2l5 11c5 1 9 5 11 10 3-4 7-7 12-6 8 1 12 8 10 15-3 11-13 16-26 16-10 0-18-3-23-9Z"/>
+          <path fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="square" d="M20 43c8-8 18-9 27-4M27 22c-1 6-5 10-11 12"/>
+        </svg>
+      </span>
+      <span class="logo-word">FORTRESS<small>HOME STRENGTH SYSTEMS</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Primary navigation">
+      <button class="nav-tab active" type="button" data-page="home">Home</button>
+      <button class="nav-tab" type="button" data-page="about">About</button>
+      <button class="nav-tab" type="button" data-page="products">Products</button>
+      <button class="nav-tab" type="button" data-page="contacts">Contacts</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page active" id="home" aria-labelledby="home-title">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="kicker">Own your strength</span>
+          <h1 id="home-title">Build your<br><span>fortress.</span></h1>
+          <p>Serious home gym equipment. Zero wasted space.</p>
+          <div class="hero-actions">
+            <button class="btn" type="button" data-go="products">View products</button>
+            <button class="btn outline" type="button" data-go="contacts">Plan my gym</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="assets/fortress-bench.jpg" alt="Matte black bench press and power rack in a premium home gym">
+          <div class="hero-stamp">Steel<br>space<br>strength</div>
+        </div>
+      </div>
+
+      <div class="strength-strip" aria-label="Fortress equipment facts">
+        <div class="strength-item"><b>700 KG</b><span>rack capacity</span></div>
+        <div class="strength-item"><b>24–40 KG</b><span>free weights</span></div>
+        <div class="strength-item"><b>1 ROOM</b><span>complete setup</span></div>
+        <div class="strength-item"><b>5 YR</b><span>frame cover</span></div>
+      </div>
+
+      <div class="home-focus wrap">
+        <div>
+          <div class="focus-mark"></div>
+          <span class="kicker">No commute. No crowd.</span>
+          <h2>Train on<br>your terms.</h2>
+          <p>Compact steel. Heavy capacity. A gym that belongs to you.</p>
+          <button class="btn dark" type="button" data-go="products">Build the setup</button>
+        </div>
+        <div class="focus-list">
+          <div class="focus-cell"><b>01</b><span>Press</span></div>
+          <div class="focus-cell"><b>02</b><span>Pull</span></div>
+          <div class="focus-cell"><b>03</b><span>Carry</span></div>
+          <div class="focus-cell"><b>04</b><span>Repeat</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page equipment-page" id="products" aria-labelledby="products-title">
+      <div class="wrap">
+        <div class="page-head">
+          <div><span class="kicker">The collection</span><h1 id="products-title">Products.</h1></div>
+          <p>Core strength tools. Home ready.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter equipment">
+          <button class="filter active" type="button" data-filter="all">All equipment</button>
+          <button class="filter" type="button" data-filter="station">Stations</button>
+          <button class="filter" type="button" data-filter="free-weight">Free weights</button>
+          <button class="filter" type="button" data-filter="accessory">Accessories</button>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card" data-type="station" data-name="F1 Rack System" data-price="$2,480" data-image="assets/fortress-bench.jpg" data-capacity="700 kg" data-footprint="180 × 170 cm" data-material="11-gauge steel" data-description="A compact rack for squats, presses and controlled heavy work.">
+            <div class="product-image"><img src="assets/fortress-bench.jpg" alt="Fortress power rack and bench press"><span class="product-number">01</span></div>
+            <div class="product-body"><span class="product-type">Station / rack</span><h3>F1 Rack System</h3><p>Full-power training in a compact footprint.</p><div class="product-foot"><span class="product-price">$2,480</span><button class="spec-btn" type="button">View specs</button></div></div>
+          </article>
+
+          <article class="product-card" data-type="station" data-name="Forge Bench" data-price="$890" data-image="assets/fortress-bench.jpg" data-capacity="450 kg" data-footprint="142 × 61 cm" data-material="Powder-coated steel" data-description="Flat-to-incline support with a rigid frame and dense performance pad.">
+            <div class="product-image"><img src="assets/fortress-bench.jpg" alt="Heavy adjustable bench in a home strength gym" style="object-position:62% center"><span class="product-number">02</span></div>
+            <div class="product-body"><span class="product-type">Station / bench</span><h3>Forge Bench</h3><p>Stable support. Seven working angles.</p><div class="product-foot"><span class="product-price">$890</span><button class="spec-btn" type="button">View specs</button></div></div>
+          </article>
+
+          <article class="product-card" data-type="free-weight" data-name="Hexlock 40" data-price="$640" data-image="assets/fortress-dumbbells.jpg" data-capacity="5–40 kg each" data-footprint="One compact pair" data-material="Steel + iron" data-description="Adjustable dumbbells that replace a full rack without losing solid handling.">
+            <div class="product-image"><img src="assets/fortress-dumbbells.jpg" alt="Pair of adjustable black steel dumbbells"><span class="product-number">03</span></div>
+            <div class="product-body"><span class="product-type">Free weight / dumbbell</span><h3>Hexlock 40</h3><p>Sixteen loads. One hard-working pair.</p><div class="product-foot"><span class="product-price">$640</span><button class="spec-btn" type="button">View specs</button></div></div>
+          </article>
+
+          <article class="product-card" data-type="free-weight" data-name="Arc 24" data-price="$145" data-image="assets/fortress-kettlebell.jpg" data-capacity="24 kg" data-footprint="Single bell" data-material="Cast iron" data-description="A balanced cast-iron kettlebell for swings, carries and total-body work.">
+            <div class="product-image"><img src="assets/fortress-kettlebell.jpg" alt="Heavy black cast iron kettlebell"><span class="product-number">04</span></div>
+            <div class="product-body"><span class="product-type">Free weight / kettlebell</span><h3>Arc 24</h3><p>One-piece iron. Built to move.</p><div class="product-foot"><span class="product-price">$145</span><button class="spec-btn" type="button">View specs</button></div></div>
+          </article>
+
+          <article class="product-card" data-type="free-weight" data-name="Iron Bar + Plates" data-price="$1,180" data-image="assets/fortress-bench.jpg" data-capacity="180 kg set" data-footprint="220 cm bar" data-material="Hard chrome steel" data-description="A full Olympic bar and plate set for progressive compound training.">
+            <div class="product-image"><img src="assets/fortress-bench.jpg" alt="Loaded barbell and black weight plates" style="object-position:25% center"><span class="product-number">05</span></div>
+            <div class="product-body"><span class="product-type">Free weight / barbell</span><h3>Iron Bar + Plates</h3><p>Clean rotation. Dense bumper plates.</p><div class="product-foot"><span class="product-price">$1,180</span><button class="spec-btn" type="button">View specs</button></div></div>
+          </article>
+
+          <article class="product-card" data-type="accessory" data-name="Core Base Kit" data-price="$320" data-image="assets/fortress-dumbbells.jpg" data-capacity="6-piece kit" data-footprint="Storage-ready" data-material="Rubber + steel" data-description="Floor protection, collars, bands and storage essentials in one starter kit.">
+            <div class="product-image"><img src="assets/fortress-dumbbells.jpg" alt="Compact home training accessories and weights" style="filter:saturate(.55) brightness(.85)"><span class="product-number">06</span></div>
+            <div class="product-body"><span class="product-type">Accessory / foundation</span><h3>Core Base Kit</h3><p>The small pieces that finish the room.</p><div class="product-foot"><span class="product-price">$320</span><button class="spec-btn" type="button">View specs</button></div></div>
+          </article>
+        </div>
+
+        <div class="equipment-note"><span>Concept equipment and pricing for demonstration.</span><span>Delivery and installation quoted by room.</span></div>
+      </div>
+    </section>
+
+    <section class="page about-page" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="page-head">
+          <div><span class="kicker">The fortress standard</span><h1 id="about-title">Built in.</h1></div>
+          <p>Strength should be available at home—every day.</p>
+        </div>
+
+        <div class="about-story">
+          <div class="about-image"><img src="assets/fortress-bench.jpg" alt="Complete black steel home gym under amber lighting"></div>
+          <div class="about-copy"><span class="kicker">Why fortress</span><h2>Heavy gear.<br>Clear purpose.</h2><p>We create focused home gyms around the way you train—not the size of a commercial floor.</p><button class="btn" type="button" data-go="contacts">Talk to the team</button></div>
+        </div>
+
+        <div class="about-values">
+          <article class="value"><b>01</b><div><h3>Strong</h3><p>Rigid frames. Serious capacity.</p></div></article>
+          <article class="value"><b>02</b><div><h3>Compact</h3><p>Every centimetre earns its place.</p></div></article>
+          <article class="value"><b>03</b><div><h3>Direct</h3><p>No clutter. Just useful work.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page contact-page" id="contacts" aria-labelledby="contacts-title">
+      <div class="wrap">
+        <div class="page-head">
+          <div><span class="kicker">Your room starts here</span><h1 id="contacts-title">Contacts.</h1></div>
+          <p>Tell us the space. We’ll shape the setup.</p>
+        </div>
+
+        <div class="contact-shell">
+          <aside class="contact-aside"><span class="kicker">Fortress desk</span><h2>Make room<br>for strength.</h2><p>Equipment, planning and installation for home training spaces.</p><div class="contact-details"><div class="contact-line"><b>Email</b> build@fortress.example</div><div class="contact-line"><b>Studio</b> Lagos, Nigeria</div><div class="contact-line"><b>Hours</b> Mon–Sat / 09–18</div></div></aside>
+          <form class="contact-form" id="contactForm"><h3>Request a home gym plan</h3><div class="form-grid"><div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required></div><div class="field"><label for="room">Room size</label><input id="room" name="room" type="text" placeholder="For example, 4 × 5 m"></div><div class="field"><label for="interest">Primary need</label><select id="interest" name="interest"><option>Complete home gym</option><option>Rack and bench</option><option>Free weights</option><option>Space planning</option><option>Delivery and installation</option><option>Equipment setup session</option></select></div><div class="field full"><label for="message">Training goal</label><textarea id="message" name="message" placeholder="Strength, conditioning, general fitness..."></textarea></div></div><div class="form-action"><small>Demonstration form. Your message stays in this browser.</small><button class="btn" type="submit">Send request</button></div><div class="form-status" id="formStatus" role="status" aria-live="polite"></div></form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-main"><div><div class="footer-logo">FORTRESS<span>.</span></div><p>Home strength systems for rooms built to work.</p></div><div class="footer-col"><b>Equipment</b><span>Racks</span><span>Benches</span><span>Free weights</span></div><div class="footer-col"><b>Services</b><span>Space plan</span><span>Install</span><span>Setup</span></div></div>
+    <div class="footer-bottom"><span>© 2026 Fortress Home Strength Systems</span><span>Concept website · Lagos</span></div>
+  </footer>
+
+  <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <div class="modal-panel">
+      <div class="modal-media"><img id="modalImage" src="assets/fortress-bench.jpg" alt="Selected Fortress equipment"></div>
+      <div class="modal-copy"><button class="modal-close" id="modalClose" type="button" aria-label="Close equipment details">×</button><span class="kicker">Fortress equipment</span><h2 id="modalName">Equipment</h2><p id="modalDescription">Details</p><div class="spec-list"><div class="spec-row"><span>Capacity</span><b id="modalCapacity">—</b></div><div class="spec-row"><span>Footprint</span><b id="modalFootprint">—</b></div><div class="spec-row"><span>Material</span><b id="modalMaterial">—</b></div><div class="spec-row"><span>Price</span><b id="modalPrice">—</b></div></div><button class="btn" id="requestProduct" type="button">Request this setup</button></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Request ready.</div>
+
+  <script>
+    (() => {
+      const pages = [...document.querySelectorAll('.page')];
+      const tabs = [...document.querySelectorAll('.nav-tab')];
+      const modal = document.getElementById('productModal');
+      const toast = document.getElementById('toast');
+      let currentProduct = '';
+      let toastTimer;
+
+      function setPage(id, updateHash = true) {
+        if (!pages.some(page => page.id === id)) return;
+        pages.forEach(page => page.classList.toggle('active', page.id === id));
+        tabs.forEach(tab => {
+          const active = tab.dataset.page === id;
+          tab.classList.toggle('active', active);
+          tab.setAttribute('aria-current', active ? 'page' : 'false');
+        });
+        if (updateHash) history.replaceState(null, '', '#' + id);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+      }
+
+      tabs.forEach(tab => tab.addEventListener('click', () => setPage(tab.dataset.page)));
+      document.querySelectorAll('[data-go]').forEach(item => item.addEventListener('click', event => {
+        event.preventDefault();
+        setPage(item.dataset.go);
+      }));
+
+      const filters = [...document.querySelectorAll('.filter')];
+      const products = [...document.querySelectorAll('.product-card')];
+      filters.forEach(filter => filter.addEventListener('click', () => {
+        filters.forEach(item => item.classList.toggle('active', item === filter));
+        products.forEach(product => product.classList.toggle('hidden', filter.dataset.filter !== 'all' && product.dataset.type !== filter.dataset.filter));
+      }));
+
+      function openProduct(card) {
+        currentProduct = card.dataset.name;
+        document.getElementById('modalImage').src = card.dataset.image;
+        document.getElementById('modalImage').alt = card.dataset.name;
+        document.getElementById('modalName').textContent = card.dataset.name;
+        document.getElementById('modalDescription').textContent = card.dataset.description;
+        document.getElementById('modalCapacity').textContent = card.dataset.capacity;
+        document.getElementById('modalFootprint').textContent = card.dataset.footprint;
+        document.getElementById('modalMaterial').textContent = card.dataset.material;
+        document.getElementById('modalPrice').textContent = card.dataset.price;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('modalClose').focus();
+      }
+
+      function closeProduct() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.spec-btn').forEach(button => button.addEventListener('click', () => openProduct(button.closest('.product-card'))));
+      document.getElementById('modalClose').addEventListener('click', closeProduct);
+      modal.addEventListener('click', event => { if (event.target === modal) closeProduct(); });
+      document.addEventListener('keydown', event => { if (event.key === 'Escape' && modal.classList.contains('open')) closeProduct(); });
+
+      document.getElementById('requestProduct').addEventListener('click', () => {
+        closeProduct();
+        setPage('contacts');
+        document.getElementById('message').value = 'I am interested in the ' + currentProduct + '.';
+        showToast(currentProduct + ' added to your request.');
+      });
+
+      document.querySelectorAll('.service-request').forEach(button => button.addEventListener('click', () => {
+        setPage('contacts');
+        document.getElementById('interest').value = button.dataset.service;
+        showToast(button.dataset.service + ' selected.');
+      }));
+
+      document.getElementById('contactForm').addEventListener('submit', event => {
+        event.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        document.getElementById('formStatus').textContent = 'Request received' + (name ? ', ' + name : '') + '. Fortress will follow up.';
+        showToast('Your Fortress request is locked in.');
+        event.currentTarget.reset();
+      });
+
+      const hash = location.hash.slice(1);
+      if (hash) setPage(hash, false);
+    })();
+  </script>
+</body>
+</html>
